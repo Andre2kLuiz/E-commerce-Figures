@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Item</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Container do formulário -->
+    <div class="container mt-5">
+        <h1 class="mb-4">Cadastrar Novo Item</h1>
+        <form th:action="@{/processCadastro}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" class="form-control" placeholder="Digite o nome do item" required />
+            </div>
+            <div class="form-group">
+                <label for="file">Imagem</label>
+                <input type="file" id="file" name="file" class="form-control-file" required />
+            </div>
+            <div class="form-group">
+                <label for="valor">Valor</label>
+                <input type="number" step="0.01" id="valor" name="valor" class="form-control" placeholder="Digite o valor do item" required />
+            </div>
+            <div class="form-group">
+                <label for="tamanho">Tamanho</label>
+                <input type="number" step="0.01" id="tamanho" name="tamanho" class="form-control" placeholder="Digite o tamanho do item" required />
+            </div>
+            <div class="form-group">
+                <label for="material">Material</label>
+                <input type="text" id="material" name="material" class="form-control" placeholder="Digite o material do item" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <a th:href="@{/admin}" class="btn btn-secondary ml-2">Voltar</a>
+        </form>
+    </div>
+
+
+    <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/webjars/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="/webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

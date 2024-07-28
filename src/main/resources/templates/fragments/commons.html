@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container text-center py-5 bg-dark" th:fragment="#">
+        <header th:fragment="#">
+            <a href="#"><i class="fas fa-phone icon"></i>+021-95-51-84</a>
+            <a href="#"><i class="fas fa-envelope icon"></i>email@email.com</a>
+            <a href="#"><i class="fas fa-map-marker-alt icon"></i>1734 Stonecoal</a>
+            <a href="#"><i class="fas fa-dollar-sign icon"></i>USD</a>
+            <a href="#"><i class="fas fa-user icon"></i>My Account</a>
+        </header>
+    </div>
+
+    <div class="container" th:fragment="main">
+        <h1 class="my-4">Figures List</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Valor</th>
+                    <th>Nome</th>
+                    <th>Tamanho</th>
+                    <th>Material</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="figure : ${figures}">
+                    <td th:if="${figure.imageUri != null and !figure.imageUri.isEmpty()}">
+                        <img width="100px" height="150px" th:src="@{'/images/' + ${figure.imageUri}}" alt="imagem"/>
+                    </td>
+                    <td th:if="${figure.imageUri == null or figure.imageUri.isEmpty()}">
+                        <span>Imagem não disponível</span>
+                    </td>
+                    <td th:text="${figure.valor}"></td>
+                    <td th:text="${figure.nome}"></td>
+                    <td th:text="${figure.tamanho}"></td>
+                    <td th:text="${figure.material}"></td>
+                    <td>
+                        <!-- Link para edição com ícone de lápis -->
+                        <a th:href="@{'/editPage/'+${figure.id}}" class="btn btn-warning">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <form th:action="@{/delete}" method="post" style="display:inline;">
+                            <input type="hidden" name="id" th:value="${figure.id}" />
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
